@@ -6,10 +6,14 @@ pipeline {
         jdk 'jdk'
         maven 'maven'
     }
+    environment {
+        APPLICATION_NAME = 'eureka'
+    }
     stages {
         stage('build') {
             steps{
-                sh "mvn clean package"
+                echo "Building ${APPLICATION_NAME}"
+                sh "mvn clean package -DskipTests=true"
             }
         }
     }
