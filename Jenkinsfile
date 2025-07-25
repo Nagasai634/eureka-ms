@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'jenkins-slave'
+        label 'jenkins-slave1'
     }
     tools {
         jdk 'jdk'
@@ -14,6 +14,11 @@ pipeline {
             steps{
                 echo "Building ${APPLICATION_NAME}"
                 sh "mvn clean package -DskipTests=true"
+            }
+        }
+        stage('codequality') {
+            steps {
+                echo "scanning ${APPLICATION_NAME} code"
             }
         }
     }
