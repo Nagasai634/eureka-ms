@@ -9,7 +9,7 @@ pipeline {
     environment {
         APPLICATION_NAME = 'eureka'
         SONAR_URL = 'http://34.122.117.31:9000'
-        SONAR_TOKEN = credetinals('sonar_creds')
+        SONAR_TOKEN = credentials('sonar_creds')
     }
     stages {
         stage('build') {
