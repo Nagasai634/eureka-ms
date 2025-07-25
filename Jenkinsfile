@@ -25,7 +25,7 @@ pipeline {
                 mvn clean verify sonar:sonar \
                       -Dsonar.projectKey=eureka-ms \
                       -Dsonar.host.url=${SONAR_URL} \
-                      -Dsonar.login=sqp_748eed9b9aaa19510244007b16459219cfa845e3
+                      -Dsonar.login=${SONAR_TOKEN}
                 """
             }
         }
