@@ -19,6 +19,12 @@ pipeline {
         stage('codequality') {
             steps {
                 echo "scanning ${APPLICATION_NAME} code"
+                sh """
+                mvn clean verify sonar:sonar \
+                      -Dsonar.projectKey=eureka-ms \
+                      -Dsonar.host.url=http://34.122.117.31:9000 \
+                      -Dsonar.login=sqp_748eed9b9aaa19510244007b16459219cfa845e3
+                """
             }
         }
     }
