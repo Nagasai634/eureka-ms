@@ -21,13 +21,23 @@ pipeline {
         stage('codequality') {
             steps {
                 echo "scanning ${APPLICATION_NAME} code"
-                sh """
-                mvn clean verify sonar:sonar \
+                withSonarQube('sonarqube') {
+                    sh """
+                    mvn clean verify sonar:sonar \
                       -Dsonar.projectKey=eureka-ms \
                       -Dsonar.host.url=${SONAR_URL} \
                       -Dsonar.login=${SONAR_TOKEN}
-                """
+                    """
+                }
+                timeout(time: 2,UNIT : "MINUTES") {
+                    script {
+                        waitforQualityGate abortPipeline: true
+                    }
+                }
             }
+        }
+        stage('Dockerbuild') {
+            echo "building the docker"
         }
     }
 }
