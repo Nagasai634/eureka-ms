@@ -37,7 +37,9 @@ pipeline {
             }
         }
         stage('Dockerbuild') {
-            echo "building the docker"
+            steps {
+                echo "building the docker"
+            }
         }
     }
 }
